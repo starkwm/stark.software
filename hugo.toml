@@ -1,0 +1,26 @@
+baseURL = 'https://stark.software/'
+languageCode = 'en-gb'
+title = 'Stark Software'
+
+disableKinds = ['rss', 'taxonomy', 'term']
+
+[markup.highlight]
+style = 'tokyonight-night'
+
+[[menu.main]]
+  name = "home"
+  weight = 1
+  url = "/"
+[[menu.main]]
+  name = "stark"
+  weight = 2
+  url = "/stark/"
+[[menu.main]]
+  name = "skbd"
+  weight = 3
+  url = "/skbd/"
+
+[[menu.footer]]
+  name = "GitHub"
+  weight = 1
+  url = "https://github.com/starkwm"
