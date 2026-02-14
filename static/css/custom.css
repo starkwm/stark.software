@@ -1,0 +1,51 @@
+header {
+  nav {
+    padding-top: 0.5rem;
+  }
+}
+
+.container {
+  max-width: 55rem;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.hack {
+  hr {
+    height: 15px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}
+
+.hack {
+  pre {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(255, 46, 136, 0.3);
+  }
+}
+
+.footer {
+  font-size: 80%;
+  display: flex;
+  padding: 0;
+  margin: 0;
+
+  .footer-left {
+    flex: 1 1 auto;
+    order: 0;
+    text-align: left;
+  }
+
+  .footer-center {
+    flex: 1 1 auto;
+    order: 1;
+    text-align: center;
+  }
+
+  .footer-right {
+    flex: 1 1 auto;
+    order: 2;
+    text-align: right;
+  }
+}
