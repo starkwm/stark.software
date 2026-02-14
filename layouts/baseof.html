@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="canonical" href="{{ .Permalink }}" />
+
+    <link rel="stylesheet" href="/css/hack.css" />
+    <link rel="stylesheet" href="/css/dark-grey.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+    <title>{{ block "title" . }}{{ .Title }} &raquo {{ .Site.Title }}{{ end }}</title>
+  </head>
+
+  <body class="hack dark-grey container">
+    <header>
+      {{ partial "header" . }}
+    </header>
+
+    <main>
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer>
+      {{ partial "footer" . }}
+    </footer>
+  </body>
+</html>
