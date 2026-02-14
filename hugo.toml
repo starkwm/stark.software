@@ -4,23 +4,20 @@ title = 'Stark Software'
 
 disableKinds = ['rss', 'taxonomy', 'term']
 
-[markup.highlight]
-style = 'tokyonight-night'
-
 [[menu.main]]
-  name = "home"
+  name = 'home'
   weight = 1
-  url = "/"
+  url = '/'
 [[menu.main]]
-  name = "stark"
+  name = 'stark'
   weight = 2
-  url = "/stark/"
+  url = '/stark/'
 [[menu.main]]
-  name = "skbd"
+  name = 'skbd'
   weight = 3
-  url = "/skbd/"
+  url = '/skbd/'
 
 [[menu.footer]]
-  name = "GitHub"
+  name = 'GitHub'
   weight = 1
-  url = "https://github.com/starkwm"
+  url = 'https://github.com/starkwm'
