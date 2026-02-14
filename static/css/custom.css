@@ -16,9 +16,7 @@ header {
     padding-bottom: 0;
     margin-bottom: 0;
   }
-}
 
-.hack {
   pre {
     padding: 0.5rem 0.75rem;
     border: 1px solid rgba(255, 46, 136, 0.3);
