@@ -11,6 +11,18 @@ header {
 }
 
 .hack {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+  }
+
   hr {
     height: 15px;
     padding-bottom: 0;
