@@ -13,8 +13,12 @@ disableKinds = ['rss', 'taxonomy', 'term']
   weight = 2
   url = '/stark/'
 [[menu.main]]
-  name = 'skbd'
+  name = 'skbd v2'
   weight = 3
+  url = '/skbd@2/'
+[[menu.main]]
+  name = 'skbd'
+  weight = 4
   url = '/skbd/'
 
 [[menu.footer]]
