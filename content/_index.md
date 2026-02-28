@@ -11,3 +11,19 @@ Because macOS doesn’t offer native window management APIs in the SDK, **Stark*
 [ax-api]: https://developer.apple.com/documentation/accessibility/accessibility-api
 [amethyst]: https://github.com/ianyh/Amethyst
 [yabai]: https://github.com/asmvik/yabai
+
+## Apps
+
+The current Stark Software apps available are:
+
+### stark
+
+A JavaScript powered window manager for macOS.
+
+### skbd (v2)
+
+A rewrite of the original **skbd** using Quartz Event Services fro monitoring key presses, to execute configured shell commands.
+
+### skbd
+
+The original **Stark Hot Key Daemon** for mapping shortcuts to shell commands.
