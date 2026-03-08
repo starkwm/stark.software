@@ -6,20 +6,24 @@ disableKinds = ['rss', 'taxonomy', 'term']
 
 [[menu.main]]
 name = 'home'
-weight = 1
 url = '/'
+weight = 1
 [[menu.main]]
 name = 'stark'
-weight = 2
 url = '/stark/'
+weight = 2
 [[menu.main]]
 name = 'skbd v2'
-weight = 3
 url = '/skbd@2/'
+weight = 3
 [[menu.main]]
 name = 'skbd'
-weight = 4
 url = '/skbd/'
+weight = 4
+[[menu.main]]
+name = 'signalbox'
+url = '/signalbox/'
+weight = 5
 
 [[menu.footer]]
 name = 'GitHub'

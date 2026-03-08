@@ -21,7 +21,7 @@ It is also possible to compile **skbd** from the [latest source][gh-stark]. This
     brew install starkwm/formulae/skbd@2 --HEAD
 
 [brew]: https://brew.sh
-[gh-stark]: https://github.com/starkwm/skbd.next
+[gh-stark]: https://github.com/starkwm/skbd
 
 ## Configuration
 
