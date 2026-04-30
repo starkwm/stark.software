@@ -20,10 +20,6 @@ weight = 3
 name = 'skbd'
 url = '/skbd/'
 weight = 4
-[[menu.main]]
-name = 'signalbox'
-url = '/signalbox/'
-weight = 5
 
 [[menu.footer]]
 name = 'GitHub'
