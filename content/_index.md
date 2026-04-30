@@ -22,7 +22,7 @@ A JavaScript powered window manager for macOS.
 
 ### skbd (v2)
 
-A rewrite of the original **skbd** using Quartz Event Services fro monitoring key presses, to execute configured shell commands.
+A rewrite of the original **skbd** using Quartz Event Services for monitoring key presses, to execute configured shell commands.
 
 ### skbd
 
