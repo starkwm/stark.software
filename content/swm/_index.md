@@ -96,7 +96,7 @@ Use config commands to update defaults for all spaces.
     hyper + f: swm -m window --grid 1:1:0:0:1:1
     hyper + r: swm -m window --focus recent
 
-[skbd]: /skbd@2/
+[skbd]: /skbd/
 
 ## Configuration
 

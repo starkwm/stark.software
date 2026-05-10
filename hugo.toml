@@ -17,13 +17,9 @@ name = 'swm'
 url = '/swm/'
 weight = 3
 [[menu.main]]
-name = 'skbd v2'
-url = '/skbd@2/'
-weight = 4
-[[menu.main]]
 name = 'skbd'
 url = '/skbd/'
-weight = 5
+weight = 4
 
 [[menu.footer]]
 name = 'GitHub'

@@ -24,10 +24,6 @@ A JavaScript powered window manager for macOS.
 
 A client and daemon program for managing windows on macOS.
 
-### skbd (v2)
-
-A rewrite of the original **skbd** using Quartz Event Services for monitoring key presses, to execute configured shell commands.
-
 ### skbd
 
-The original **Stark Hot Key Daemon** for mapping shortcuts to shell commands.
+A daemon using Quartz Event Services for monitoring key presses, to execute configured shell commands.
