@@ -20,6 +20,10 @@ The current Stark Software apps available are:
 
 A JavaScript powered window manager for macOS.
 
+### swm
+
+A client and daemon program for managing windows on macOS.
+
 ### skbd (v2)
 
 A rewrite of the original **skbd** using Quartz Event Services for monitoring key presses, to execute configured shell commands.
