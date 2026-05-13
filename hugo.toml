@@ -6,6 +6,7 @@ disableKinds = ['rss', 'taxonomy', 'term']
 
 [params]
 description = 'Open-source macOS productivity tools and documentation.'
+htmlLang = 'en-GB'
 
 [[menu.main]]
 name = 'Home'
