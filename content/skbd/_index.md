@@ -1,5 +1,7 @@
 +++
 title = 'skbd'
+description = 'A keyboard shortcut daemon for macOS built on Quartz Event Services.'
+weight = 30
 +++
 
 **skbd** is a daemon application for macOS that uses [Quartz Event Services][quartz] to monitor key presses, then look up those against configured hot keys. It can differentiate left and right modifier keys.

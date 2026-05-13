@@ -1,3 +1,7 @@
+---
+description: Open-source macOS productivity tools built for fast, intentional desktop workflows.
+---
+
 **Stark Software** is a collection of [open-source][starkwm] macOS apps designed to boost productivity. Each app started as a solution to a problem I personally faced.
 
 ## How it started
@@ -11,19 +15,3 @@ Because macOS doesn’t offer native window management APIs in the SDK, **Stark*
 [ax-api]: https://developer.apple.com/documentation/accessibility/accessibility-api
 [amethyst]: https://github.com/ianyh/Amethyst
 [yabai]: https://github.com/asmvik/yabai
-
-## Apps
-
-The current Stark Software apps available are:
-
-### stark
-
-A JavaScript powered window manager for macOS.
-
-### swm
-
-A client and daemon program for managing windows on macOS.
-
-### skbd
-
-A daemon using Quartz Event Services for monitoring key presses, to execute configured shell commands.

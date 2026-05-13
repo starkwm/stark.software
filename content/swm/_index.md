@@ -1,5 +1,7 @@
 +++
 title = 'swm'
+description = 'A client and daemon for scriptable macOS window management.'
+weight = 20
 +++
 
 **swm** is a client and daemon program for managing windows on macOS. It is inspired by [Yabai][yabai], using similar methods for maintaining window state without doing tiling window management itself.

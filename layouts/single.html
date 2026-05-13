@@ -1,5 +1,20 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
+  <div class="docs-layout">
+    {{ partial "docs-sidebar" . }}
 
-  {{ .Content }}
+    <article class="docs-content">
+      <header class="page-header">
+        <h1>{{ .Title }}</h1>
+        {{ with .Description }}
+          <p>{{ . }}</p>
+        {{ end }}
+      </header>
+
+      <div class="prose">
+        {{ .Content }}
+      </div>
+    </article>
+
+    {{ partial "page-toc" . }}
+  </div>
 {{ end }}

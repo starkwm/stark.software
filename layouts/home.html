@@ -3,7 +3,27 @@
 {{ end }}
 
 {{ define "main" }}
-  <h1>{{ .Site.Title }}</h1>
+  <section class="home-hero">
+    <div class="home-hero__content">
+      <h1>{{ .Site.Title }}</h1>
+      <div class="lead">
+        {{ .Content }}
+      </div>
+    </div>
+  </section>
 
-  {{ .Content }}
+  <section class="section-block" aria-labelledby="projects-heading">
+    <div class="section-block__header">
+      <h2 id="projects-heading">Projects</h2>
+    </div>
+
+    <div class="project-grid">
+      {{ range site.Sections.ByWeight }}
+        <a class="project-card" href="{{ .RelPermalink }}">
+          <span class="project-card__name">{{ .Title }}</span>
+          <span class="project-card__summary">{{ .Description }}</span>
+        </a>
+      {{ end }}
+    </div>
+  </section>
 {{ end }}

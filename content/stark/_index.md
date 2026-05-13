@@ -1,5 +1,7 @@
 +++
 title = 'Stark'
+description = 'A JavaScript-powered window manager for macOS.'
+weight = 10
 +++
 
 **Stark** is a window manager for macOS. It is powered by a JavaScript API that let's users create their own shortcuts for maanging their windows and applications.

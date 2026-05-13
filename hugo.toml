@@ -1,15 +1,18 @@
 baseURL = 'https://stark.software/'
-languageCode = 'en-gb'
+locale = 'en_GB'
 title = 'Stark Software'
 
 disableKinds = ['rss', 'taxonomy', 'term']
 
+[params]
+description = 'Open-source macOS productivity tools and documentation.'
+
 [[menu.main]]
-name = 'home'
+name = 'Home'
 url = '/'
 weight = 1
 [[menu.main]]
-name = 'stark'
+name = 'Stark'
 url = '/stark/'
 weight = 2
 [[menu.main]]

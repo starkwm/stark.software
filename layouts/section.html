@@ -1,5 +1,36 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
+  <div class="docs-layout">
+    {{ partial "docs-sidebar" . }}
 
-  {{ .Content }}
+    <article class="docs-content">
+      <header class="page-header">
+        <h1>{{ .Title }}</h1>
+        {{ with .Description }}
+          <p>{{ . }}</p>
+        {{ end }}
+      </header>
+
+      <div class="prose">
+        {{ .Content }}
+      </div>
+
+      {{ if .Pages }}
+        <section class="doc-list" aria-labelledby="more-docs-heading">
+          <h2 id="more-docs-heading">Documentation</h2>
+          <div class="doc-list__items">
+            {{ range .Pages.ByWeight }}
+              <a class="doc-list__item" href="{{ .RelPermalink }}">
+                <span>{{ .Title }}</span>
+                {{ with .Description }}
+                  <small>{{ . }}</small>
+                {{ end }}
+              </a>
+            {{ end }}
+          </div>
+        </section>
+      {{ end }}
+    </article>
+
+    {{ partial "page-toc" . }}
+  </div>
 {{ end }}

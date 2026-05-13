@@ -1,5 +1,7 @@
 +++
 title = 'Stark API Documentation'
+description = 'JavaScript API reference for Stark window-management configuration.'
+weight = 10
 +++
 
 **Stark** provides a JavaScript API for configuring your window management.

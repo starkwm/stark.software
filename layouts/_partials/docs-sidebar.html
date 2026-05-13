@@ -1,0 +1,33 @@
+{{ $section := .CurrentSection }}
+{{ if .IsSection }}
+  {{ $section = . }}
+{{ end }}
+
+<aside class="docs-sidebar" aria-label="Documentation navigation">
+  <div class="docs-sidebar__group">
+    <p class="docs-sidebar__label">Products</p>
+    {{ range site.Sections.ByWeight }}
+      {{ $isCurrent := eq .RelPermalink $section.RelPermalink }}
+      <a class="docs-sidebar__link{{ if $isCurrent }} is-active{{ end }}" href="{{ .RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>
+        {{ .Title }}
+      </a>
+    {{ end }}
+  </div>
+
+  {{ with $section }}
+    {{ if .Pages }}
+      <div class="docs-sidebar__group">
+        <p class="docs-sidebar__label">{{ .Title }} docs</p>
+        <a class="docs-sidebar__link{{ if $.IsSection }} is-active{{ end }}" href="{{ .RelPermalink }}"{{ if $.IsSection }} aria-current="page"{{ end }}>
+          Overview
+        </a>
+        {{ range .Pages.ByWeight }}
+          {{ $isCurrent := eq .RelPermalink $.RelPermalink }}
+          <a class="docs-sidebar__link{{ if $isCurrent }} is-active{{ end }}" href="{{ .RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>
+            {{ .Title }}
+          </a>
+        {{ end }}
+      </div>
+    {{ end }}
+  {{ end }}
+</aside>

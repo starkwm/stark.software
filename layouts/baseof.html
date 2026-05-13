@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="{{ replace (site.Language.Locale | default "en_GB") "_" "-" }}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}" />
 
     <link rel="canonical" href="{{ .Permalink }}" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-    <link rel="stylesheet" href="/css/hack.css" />
-    <link rel="stylesheet" href="/css/dark-grey.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" />
+    <link rel="stylesheet" href="/css/site.css" />
 
-    <title>{{ block "title" . }}{{ .Title }} &raquo {{ .Site.Title }}{{ end }}</title>
+    <title>{{ block "title" . }}{{ .Title }} &middot; {{ .Site.Title }}{{ end }}</title>
   </head>
 
-  <body class="hack dark-grey container">
-    <header>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header class="site-header">
       {{ partial "header" . }}
     </header>
 
-    <main>
+    <main id="content">
       {{ block "main" . }}{{ end }}
     </main>
 
-    <footer>
+    <footer class="site-footer">
       {{ partial "footer" . }}
     </footer>
   </body>
