@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Stark Software">
   <rect width="64" height="64" fill="#fbfbfa"/>
-  <rect x="8" y="8" width="48" height="48" fill="#a34824"/>
+  <rect x="8" y="8" width="48" height="48" fill="#84cc16"/>
   <path fill="#fbfbfa" d="M21 45v-7h4v3h14v-8H25l-4-4V19l4-4h18v7h-4v-3H25v8h14l4 4v10l-4 4H21Z"/>
 </svg>
