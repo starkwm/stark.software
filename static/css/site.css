@@ -391,6 +391,7 @@ button:focus-visible {
     code {
       border: 0;
       background: transparent;
+      color: inherit;
       padding: 0;
     }
   }

@@ -4,6 +4,9 @@ title = 'Stark Software'
 
 disableKinds = ['rss', 'taxonomy', 'term']
 
+[markup.highlight]
+style = 'github'
+
 [params]
 description = 'Open-source macOS productivity tools and documentation.'
 htmlLang = 'en-GB'
