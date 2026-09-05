@@ -6,6 +6,7 @@ disableKinds = ['rss', 'taxonomy', 'term']
 
 [markup.highlight]
 style = 'github'
+noClasses = false
 
 [params]
 description = 'Open-source macOS productivity tools and documentation.'
