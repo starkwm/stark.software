@@ -1,6 +1,7 @@
 +++
 title = 'swm'
 description = 'A client and daemon for scriptable macOS window management.'
+homeSummary = 'Command-line window management with optional automatic tiling'
 weight = 20
 +++
 

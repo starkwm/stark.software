@@ -1,6 +1,7 @@
 +++
 title = 'Stark'
 description = 'A JavaScript-powered window manager for macOS.'
+homeSummary = 'JavaScript-powered window manager'
 weight = 10
 +++
 

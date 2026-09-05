@@ -1,6 +1,7 @@
 +++
 title = 'skbd'
 description = 'A keyboard shortcut daemon for macOS built on Quartz Event Services.'
+homeSummary = 'Keyboard shortcuts for shell commands'
 weight = 30
 +++
 

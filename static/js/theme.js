@@ -1,6 +1,5 @@
 (() => {
   const root = document.documentElement;
-  const preference = window.matchMedia("(prefers-color-scheme: dark)");
   let savedTheme;
 
   try {
@@ -21,11 +20,7 @@
     }
   }
 
-  applyTheme(savedTheme || (preference.matches ? "dark" : "light"));
-
-  preference.addEventListener("change", () => {
-    if (!savedTheme) applyTheme(preference.matches ? "dark" : "light");
-  });
+  applyTheme(savedTheme || "dark");
 
   document.addEventListener("DOMContentLoaded", () => {
     const button = document.querySelector(".theme-toggle");

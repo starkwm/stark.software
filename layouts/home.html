@@ -1,29 +1,45 @@
-{{ define "title" }}
-  {{ .Site.Title }}
-{{ end }}
+{{ define "title" }}{{ .Site.Title }}{{ end }}
 
 {{ define "main" }}
-  <section class="home-hero">
-    <div class="home-hero__content">
-      <h1>{{ .Site.Title }}</h1>
-      <div class="lead">
-        {{ .Content }}
+  <div class="home-layout">
+    <section class="home-hero" aria-labelledby="hero-heading">
+      <div class="home-hero__content">
+        <h1 id="hero-heading">Make your Mac<br />work your way.</h1>
+        <p class="lead">Open-source tools for fast, intentional desktop workflows.</p>
+        <a class="button-link" href="#projects">Explore the tools {{ partial "arrow" . }}</a>
       </div>
-    </div>
-  </section>
 
-  <section class="section-block" aria-labelledby="projects-heading">
-    <div class="section-block__header">
-      <h2 id="projects-heading">Projects</h2>
-    </div>
+      <figure class="terminal" aria-label="Example terminal session installing swm and querying a window">
+        <div class="terminal__titlebar" aria-hidden="true">
+          <span class="terminal__lights"><i></i><i></i><i></i></span>
+          <span>~ — fish</span>
+        </div>
+        <div class="terminal__body">
+          <p class="terminal__command"><span aria-hidden="true">$</span> <code>brew install starkwm/formulae/swm</code></p>
+          <p class="terminal__command"><span aria-hidden="true">$</span> <code>swm query windows |<br />  jq '.[0] | {app, title, space}'</code></p>
+          <pre class="terminal__output"><code>{
+  <span>"app"</span>: "Ghostty",
+  <span>"title"</span>: "~/Code/starkwm/swm",
+  <span>"space"</span>: 0
+}</code></pre>
+          <p class="terminal__prompt" aria-hidden="true">$ <span class="terminal__cursor"></span></p>
+        </div>
+      </figure>
+    </section>
 
-    <div class="project-grid">
+    <section class="project-list" id="projects" aria-label="Projects">
       {{ range site.Sections.ByWeight }}
-        <a class="project-card" href="{{ .RelPermalink }}">
-          <span class="project-card__name">{{ .Title }}</span>
-          <span class="project-card__summary">{{ .Description }}</span>
+        <a class="project-row" href="{{ .RelPermalink }}">
+          <h2 class="project-row__name">{{ .Title }}</h2>
+          <p class="project-row__summary">{{ .Params.homeSummary | default .Description }}</p>
+          <span class="project-row__link">Documentation {{ partial "arrow" . }}</span>
         </a>
       {{ end }}
-    </div>
-  </section>
+    </section>
+
+    <section class="home-story" aria-labelledby="story-heading">
+      <h2 id="story-heading">Small tools. A shared idea.</h2>
+      <p>Stark began as a personal window manager in 2016. swm and skbd<br class="desktop-break" /> carry that idea forward with shell commands and keyboard-driven control.</p>
+    </section>
+  </div>
 {{ end }}
