@@ -12,22 +12,31 @@ weight = 30
 
 The official way to install **skbd** is via [Homebrew][brew].
 
-    brew install starkwm/formulae/skbd
+    brew tap starkwm/formulae
+    brew install starkwm/formulae/skbd@2
 
 You can then use `brew services` to start **skbd** as a _launchd_ service, once you have a configuration file.
 
-    brew services start skbd
+    brew services start skbd@2
 
-It is also possible to compile **skbd** from the [latest source][gh-stark]. This requires you to have the latest Xcode installed.
+It is also possible to compile **skbd** from the [latest source][gh-skbd]. This requires you to have the latest Xcode and macOS SDK installed.
 
-    brew install starkwm/formulae/skbd --HEAD
+    git clone https://github.com/starkwm/skbd.git
+    cd skbd
+    make
+
+If you build from source, you will need to create a Launch Agent `.plist` file to run **skbd** in the background.
 
 [brew]: https://brew.sh
-[gh-stark]: https://github.com/starkwm/skbd
+[gh-skbd]: https://github.com/starkwm/skbd
 
 ## Configuration
 
-`skbd` can be configured using a single file located at `~/.config/skbd/skbdrc` by default. The path can be overridden using the `-c/--config` flag.
+`skbd` can be configured using a single file, or a directory of multiple files. By default `~/.config/skbd/skbdrc` is used. If the configured path points to a directory, `skbd` loads all non-hidden regular files in that directory in lexicographical filename order. The path can be overridden using the `-c/--config` flag.
+
+The configuration is reloaded automatically while `skbd` is running. For a single file, changes to the file are picked up without restarting `skbd`. If the configured path is a symlink, `skbd` watches both the symlink location and the resolved target, so editing the target or repointing the symlink reloads the configuration. For a directory configuration, `skbd` reloads when files in the directory are edited, added, removed, or renamed.
+
+If a changed configuration cannot be loaded or parsed, `skbd` prints an error and keeps using the last valid configuration.
 
 You can declare key binds by specifying one or more modifier keys and the key to bind to a command.
 
