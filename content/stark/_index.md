@@ -2,6 +2,7 @@
 title = 'Stark'
 description = 'A JavaScript-powered window manager for macOS.'
 homeSummary = 'JavaScript-powered window manager'
+homeDetails = 'Configure your desktop in JavaScript, with an API for windows, applications, screens, and keyboard shortcuts. Write your own window-management behaviour in a stark.js file, with direct access to the objects on your desktop.'
 weight = 10
 +++
 

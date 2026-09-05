@@ -2,6 +2,7 @@
 title = 'swm'
 description = 'A client and daemon for scriptable macOS window management.'
 homeSummary = 'Command-line window management with optional automatic tiling'
+homeDetails = 'Move, resize, and focus windows from the command line, or let automatic tiling arrange them for you. Query displays, spaces, and windows as JSON, then use shell scripts and event signals to automate your desktop.'
 weight = 20
 +++
 

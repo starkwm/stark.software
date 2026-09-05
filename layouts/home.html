@@ -29,11 +29,14 @@
 
     <section class="project-list" id="projects" aria-label="Projects">
       {{ range site.Sections.ByWeight }}
-        <a class="project-row" href="{{ .RelPermalink }}">
-          <h2 class="project-row__name">{{ .Title }}</h2>
-          <p class="project-row__summary">{{ .Params.homeSummary | default .Description }}</p>
-          <span class="project-row__link">Documentation {{ partial "arrow" . }}</span>
-        </a>
+        <article class="project-row">
+          <h2 class="project-row__name"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <div class="project-row__details">
+            <p class="project-row__summary">{{ .Params.homeSummary | default .Description }}</p>
+            {{ with .Params.homeDetails }}<p class="project-row__description">{{ . }}</p>{{ end }}
+          </div>
+          <a class="project-row__link" href="{{ .RelPermalink }}" aria-label="{{ .Title }} documentation">Documentation {{ partial "arrow" . }}</a>
+        </article>
       {{ end }}
     </section>
 

@@ -628,13 +628,9 @@ button:focus-visible {
   align-items: center;
   gap: 36px;
   min-height: 68px;
-  padding: 14px 6%;
+  padding: 26px 6%;
   border-bottom: 1px solid var(--border);
   text-decoration: none;
-}
-
-.project-row:hover {
-  background: var(--surface-muted);
 }
 
 .project-row__name {
@@ -644,13 +640,34 @@ button:focus-visible {
   line-height: 1.2;
 }
 
+.project-row__name a {
+  text-decoration: none;
+}
+
+.project-row__name a:hover,
+.project-row__link:hover {
+  text-decoration: underline;
+}
+
+.project-row__details {
+  max-width: 60ch;
+}
+
+.project-row__description {
+  margin-top: 10px;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
 .project-row__summary {
-  max-width: 450px;
+  font-weight: 600;
   font-size: 14px;
   line-height: 1.45;
 }
 
 .project-row__link {
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-self: end;
@@ -829,7 +846,7 @@ button:focus-visible {
     font-size: 22px;
   }
 
-  .project-row__summary {
+  .project-row__details {
     grid-row: 2;
     max-width: 420px;
   }

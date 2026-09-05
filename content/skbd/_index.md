@@ -2,6 +2,7 @@
 title = 'skbd'
 description = 'A keyboard shortcut daemon for macOS built on Quartz Event Services.'
 homeSummary = 'Keyboard shortcuts for shell commands'
+homeDetails = 'Bind key combinations to shell commands, with support for left and right modifier keys. Configuration reloads as you edit it. Use it to launch apps, run scripts, or trigger swm commands from the keyboard.'
 weight = 30
 +++
 
