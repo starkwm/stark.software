@@ -9,7 +9,7 @@ style = 'github'
 noClasses = false
 
 [params]
-description = 'Open-source macOS productivity tools and documentation.'
+description = 'Open-source window managers and keyboard shortcuts for macOS.'
 htmlLang = 'en-GB'
 
 [[menu.main]]

@@ -6,53 +6,53 @@ homeDetails = 'Bind key combinations to shell commands, with support for left an
 weight = 30
 +++
 
-**skbd** is a daemon application for macOS that uses [Quartz Event Services][quartz] to monitor key presses, then look up those against configured hot keys. It can differentiate left and right modifier keys.
+skbd runs shell commands when you press configured keyboard shortcuts. It uses [Quartz Event Services][quartz] to monitor key presses on macOS and can distinguish left and right modifier keys.
 
 [quartz]: https://developer.apple.com/documentation/coregraphics/quartz-event-services
 
 ## Installation
 
-The official way to install **skbd** is via [Homebrew][brew].
+Install skbd with [Homebrew][brew].
 
     brew tap starkwm/formulae
     brew install starkwm/formulae/skbd@2
 
-You can then use `brew services` to start **skbd** as a _launchd_ service, once you have a configuration file.
+Create a configuration file, then start skbd as a launchd service with `brew services`.
 
     brew services start skbd@2
 
-It is also possible to compile **skbd** from the [latest source][gh-skbd]. This requires you to have the latest Xcode and macOS SDK installed.
+To build skbd from the [latest source][gh-skbd], install the latest Xcode and macOS SDK.
 
     git clone https://github.com/starkwm/skbd.git
     cd skbd
     make
 
-If you build from source, you will need to create a Launch Agent `.plist` file to run **skbd** in the background.
+If you build from source, you will need to create a Launch Agent `.plist` file to run skbd in the background.
 
 [brew]: https://brew.sh
 [gh-skbd]: https://github.com/starkwm/skbd
 
 ## Configuration
 
-`skbd` can be configured using a single file, or a directory of multiple files. By default `~/.config/skbd/skbdrc` is used. If the configured path points to a directory, `skbd` loads all non-hidden regular files in that directory in lexicographical filename order. The path can be overridden using the `-c/--config` flag.
+Configure `skbd` with a single file or a directory of files. It reads `~/.config/skbd/skbdrc` by default. If the configured path points to a directory, `skbd` loads all non-hidden regular files in that directory in lexicographical filename order. Use `-c/--config` to select another path.
 
-The configuration is reloaded automatically while `skbd` is running. For a single file, changes to the file are picked up without restarting `skbd`. If the configured path is a symlink, `skbd` watches both the symlink location and the resolved target, so editing the target or repointing the symlink reloads the configuration. For a directory configuration, `skbd` reloads when files in the directory are edited, added, removed, or renamed.
+`skbd` reloads the configuration when you edit it. You do not need to restart the daemon. If the configured path is a symlink, `skbd` watches both the symlink location and the resolved target, so editing the target or repointing the symlink reloads the configuration. For a directory configuration, `skbd` reloads when files in the directory are edited, added, removed, or renamed.
 
 If a changed configuration cannot be loaded or parsed, `skbd` prints an error and keeps using the last valid configuration.
 
-You can declare key binds by specifying one or more modifier keys and the key to bind to a command.
+To bind a command, specify its modifier keys and key.
 
 ```
 cmd + shift - k: open -a iTerm
 ```
 
-By default, the key event is consumed after executing the command. To allow the key press to pass through to the application, use `->` instead of `:`.
+By default, `skbd` consumes the key event after executing the command. To allow the key press to pass through to the application, use `->` instead of `:`.
 
 ```
 cmd + shift - k -> open -a iTerm
 ```
 
-The command will be executed using the shell defined by the `$SHELL` environment variable, falling back to `/bin/bash` if not set. Commands can be split over multiple lines by using a `\` at the end of the line.
+`skbd` runs commands with the shell in `$SHELL`, or `/bin/bash` if it is unset. End a line with `\` to continue a command on the next line.
 
 ```
 ctrl + shift - enter:
@@ -67,11 +67,11 @@ ctrl + shift - enter:
 
 ### Comments
 
-Comments can be added to the configuration file with lines starting with `#`.
+Start a line with `#` to add a comment.
 
 ### Modifiers
 
-The available modifiers values are:
+Available modifiers:
 
 - `shift`
 - `ctrl`
@@ -81,13 +81,13 @@ The available modifiers values are:
 - `hyper`
 - `fn`
 
-The `shift`, `ctrl`, `alt`, and `cmd` modifiers can be prefixed with `l` or `r` to specify the left or right modifier key on the keyboard.
+Prefix `shift`, `ctrl`, `alt`, or `cmd` with `l` or `r` to select the left or right modifier key.
 
-The `meh` modifier key, is a shortcut for using `shift`, `control`, and `alt` all together.
+`meh` combines `shift`, `ctrl`, and `alt`.
 
-The `hyper` modifier key, is a shortcut for using `shift`, `control`, `alt`, and `command` all together.
+`hyper` combines `shift`, `ctrl`, `alt`, and `cmd`.
 
-The `fn` modifier key, which is the "globe" key.
+`fn` is the Function or Globe key.
 
 ### Keys
 
@@ -114,9 +114,9 @@ The available key values are:
 - `0` to `9`
 - `` ` ``, `-`, `=`, `[`, `]`, `'`, `;`, `\\`, `,`, `.`, `/`
 
-### Block List
+### Block list
 
-You can specify a list of processes to ignore shortcuts when that process is the front-most process.
+Add process names to `.blocklist` to disable shortcuts while one of those processes is frontmost.
 
 ```
 .blocklist [
@@ -125,4 +125,4 @@ You can specify a list of processes to ignore shortcuts when that process is the
 ]
 ```
 
-When the specified process is the current front-most process, any matching shortcuts will not execute the command.
+In this example, skbd does not run shortcuts while Ghostty or Finder is frontmost.

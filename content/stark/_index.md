@@ -1,43 +1,43 @@
 +++
 title = 'Stark'
-description = 'A JavaScript-powered window manager for macOS.'
-homeSummary = 'JavaScript-powered window manager'
-homeDetails = 'Configure your desktop in JavaScript, with an API for windows, applications, screens, and keyboard shortcuts. Write your own window-management behaviour in a stark.js file, with direct access to the objects on your desktop.'
+description = 'A macOS window manager configured in JavaScript.'
+homeSummary = 'Window management in JavaScript'
+homeDetails = 'Write a stark.js file to move and resize windows, control applications, and bind keyboard shortcuts with the JavaScript API.'
 weight = 10
 +++
 
-**Stark** is a window manager for macOS. It is powered by a JavaScript API that let's users create their own shortcuts for maanging their windows and applications.
+Stark is a window manager for macOS. Use its JavaScript API to create keyboard shortcuts that control windows and applications.
 
 ## Installation
 
-The official way to install **Stark** is via [Homebrew][brew].
+Install Stark with [Homebrew][brew].
 
     brew install starkwm/formulae/stark
 
-You can then launch **Stark** and grant it accessibility permissions, and restart it. If you would like **Stark** to run when you log in. You can enable the _Launch at login_ menu item.
+Launch Stark, grant it Accessibility permission, then restart it. Enable _Launch at login_ in its menu to start it when you log in.
 
-There is also a _tip_ version of **Stark** available in the Homebrew tap.
+The Homebrew tap also has an unstable _tip_ build.
 
     brew install starkwm/formulae/stark@tip
 
-This is an unstable build of **Stark**, built from the current tip of the [GitHub repository][gh-stark]. It is _not_ updated nightly.
+This build uses the latest source from the [GitHub repository][gh-stark] at the time of the build. It is not updated nightly.
 
 [brew]: https://brew.sh
 [gh-stark]: https://github.com/starkwm/stark
 
 ## Configuration
 
-You configure **Stark** with a `stark.js` configuration file. This file can live in one of three locations.
+Configure Stark with a `stark.js` file in one of these locations.
 
 - `~/.stark.js`
 - `~/.config/stark/stark.js`
 - `~/Library/Application Support/Stark/stark.js`
 
-The first file found will be the configuration that is loaded.
+Stark loads the first file it finds in the order above.
 
-From the menu bar icon, logging can also be enabled which loads debug information to `~/.stark.log`. Enabling this is useful when you're using the `print` function in your configuration.
+Enable logging from the menu bar icon to write debug output to `~/.stark.log`. This includes calls to `print` in your configuration.
 
-The full [API documentation][api-docs] is available. You can see [Tom's configuration][tom-config] as an example of configuring **Stark** with simple manual window management.
+See the [API reference][api-docs] for available methods, or [Tom's configuration][tom-config] for an example of manual window management.
 
 [api-docs]: /stark/api/
 [tom-config]: https://github.com/tombell/dotfiles/blob/main/tag-macos/config/stark/stark.js

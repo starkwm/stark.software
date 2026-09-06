@@ -1,35 +1,35 @@
 +++
-title = 'Stark API Documentation'
+title = 'Stark API reference'
 description = 'JavaScript API reference for Stark window-management configuration.'
 weight = 10
 +++
 
-**Stark** provides a JavaScript API for configuring your window management.
+Use the Stark JavaScript API in your `stark.js` configuration.
 
-The classes below are available in the global scope. Static methods will be accessible on the global object, and the instance methods and fields available on objects returned from static methods.
+The classes below are available globally. Call static methods on the class, then use instance methods and fields on the objects they return.
 
-There is a global `print` function available to aid with debugging.
+Use the global `print` function to write debug output.
 
 ## Application
 
-`Application` is used for interacting with running applications. References to an application can become stale if the application is terminated, use `isTerminated` to check.
+`Application` represents a running application. Check `isTerminated` before using a reference to an application that may have quit.
 
-### Static Methods
+### Static methods
 
 - **all()**: Return all running applications
 - **focused()**: Return the focused application
 - **find(string)**: Return the application with the given name
 
-### Instance Methods
+### Instance methods
 
-- **windows()**: Return all knowwn winodws for the application
+- **windows()**: Return all known windows for the application
 - **activate()**: Activate the application, bringing all windows forward
 - **focus()**: Activate the application, bringing the main window forward
 - **show()**: Show the application
 - **hide()**: Hide the application
 - **terminate()**: Quit the application
 
-### Instance Fields
+### Instance fields
 
 - **name**: Name of the application
 - **bundleID**: Bundle ID of the application
@@ -40,14 +40,14 @@ There is a global `print` function available to aid with debugging.
 
 ## Window
 
-`Window` is used for interacting with application windows. A window is displayed on a screen within a rectangle. Their position can be alterated by giving coordinates to a point within the rectangle.
+`Window` represents an application window. Change its position and size with `setTopLeft`, `setSize`, or `setFrame`.
 
-### Static Methods
+### Static methods
 
 - **all()**: Return all known windows
 - **focused()**: Return the focused window
 
-### Instance Methods
+### Instance methods
 
 - **setFrame([rect](#rectangle))**: Set the top left point, and size of the window
 - **setTopLeft([point](#point))**: Set the top left point of the window
@@ -58,7 +58,7 @@ There is a global `print` function available to aid with debugging.
 - **focus()**: Focus the window
 - **spaces()**: Return the spaces that contain the window
 
-### Instance Fields
+### Instance fields
 
 - **id**: Unique identifier for the window
 - **application**: Application the window belongs to
@@ -74,19 +74,19 @@ There is a global `print` function available to aid with debugging.
 
 ## Screen
 
-`Screen` is used for interacting with a display's frame size, and other screens when using multiple screens.
+`Screen` provides display dimensions and references to neighbouring screens.
 
-### Static Methods
+### Static methods
 
 - **all()**: Return all screens
 - **focused()**: Return the focused screen
 
-### Instance Methods
+### Instance methods
 
 - **spaces()**: Return all spaces for the screen
 - **currentSpace()**: Return the current space for the screen
 
-### Instance Fields
+### Instance fields
 
 - **id**: Unique identifier for the screen
 - **flippedFrame**: Top left point and size of the screen
@@ -96,20 +96,20 @@ There is a global `print` function available to aid with debugging.
 
 ## Space
 
-`Space` is used for interacting with mission control spaces. Due to changes in newer macOS versions, this functionality has been become less useful as we're unable to move windows programmatically between spaces now.
+`Space` provides information about Mission Control spaces. Stark cannot move windows between spaces on newer macOS versions.
 
-### Static Methods
+### Static methods
 
 - **all()**: Return all spaces
 - **at(number)**: Return the space at the given index
 - **active()**: Return the currently active space
 
-### Instance Methods
+### Instance methods
 
 - **screens()**: Return all screens the space is on
 - **windows()**: Return all windows on the space
 
-### Instance Fields
+### Instance fields
 
 - **id**: Unique identifier for the space
 - **isNormal**: Whether the space is a non-fullscreen space
@@ -117,14 +117,14 @@ There is a global `print` function available to aid with debugging.
 
 ## Keymap
 
-`Keymap` is used for registering shortcuts with a callback function.
+`Keymap` registers keyboard shortcuts that call a function.
 
-### Static Methods
+### Static methods
 
 - **on(string, string[], () => void)**: Register the given key, modifiers combination, and callback function
 - **off(string)**: Unregister the keymap with the given identifier
 
-### Instance Fields
+### Instance fields
 
 - **id**: Unique identifier for the keymap
 - **key**: Key for the keymap
@@ -132,7 +132,7 @@ There is a global `print` function available to aid with debugging.
 
 ## Types
 
-These are types that are returned by methods and fields, or as arguments to method calls.
+Methods and fields use these types for arguments and return values.
 
 ### Rectangle
 

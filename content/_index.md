@@ -1,26 +1,22 @@
 ---
-description: Open-source macOS productivity tools built for fast, intentional desktop workflows.
+description: Open-source window managers and keyboard shortcuts for macOS.
 ---
 
-**Stark Software** is a collection of [open-source][starkwm] macOS apps designed to boost productivity. Each app started as a solution to a problem I personally faced.
+Stark Software is a collection of [open-source][starkwm] macOS tools. I built them to manage my windows and run commands from the keyboard.
 
 ## How it started
 
-I built the first version of **Stark** in [early 2016][first-commit] while learning Swift. It started as a tool I wanted for myself — something that made managing windows on macOS feel fast, intentional, and effortless.
+I built the first version of Stark in [early 2016][first-commit] while learning Swift. I wanted to control my windows with keyboard shortcuts and configure their behaviour in JavaScript.
 
-Because macOS doesn’t offer native window management APIs in the SDK, **Stark** is powered by a combination of the [Accessibility API][ax-api] and carefully used private frameworks. Over the past decade, it has evolved continuously — refined through real‑world use, and inspired by the [incredible open‑source][amethyst] macOS [window manager community][yabai].
+Stark uses the [Accessibility API][ax-api] and private macOS frameworks to manage windows. My work on it has drawn on [Amethyst][amethyst] and [yabai][yabai].
 
 ## Why swm exists
 
-After years of maintaining **Stark** as a JavaScript-configurable app, I wanted a smaller foundation for window management — something closer to a system tool than an application framework. **swm** is that lower-level piece: a daemon that tracks displays, spaces, and windows, plus a command line interface for querying and controlling them.
-
-It keeps the useful parts of scriptable window management while moving away from a public JavaScript API mapped directly into Swift code. The result is a tool that fits better into shell scripts, launch agents, and keyboard-driven workflows.
+After years of maintaining Stark, I wanted to configure window management with shell commands. swm runs as a daemon that tracks displays, spaces, and windows. Its command-line interface lets scripts query and control them.
 
 ## Why skbd exists
 
-Window management only feels fast when the controls are immediate. **skbd** grew out of that need: a small daemon for binding key combinations to shell commands, built specifically for macOS and able to distinguish left and right modifier keys.
-
-Together, **skbd** and **swm** form a more modular version of the original idea behind **Stark**. One tool listens for intent from the keyboard, the other applies that intent to the desktop.
+I built skbd to bind key combinations to shell commands. It can distinguish left and right modifier keys. Pair it with swm to manage windows from the keyboard.
 
 [starkwm]: https://github.com/starkwm
 [first-commit]: https://github.com/starkwm/stark/commit/7cfb1e2339bdb454e158b3e8c0b9fc8ca846f8ed
