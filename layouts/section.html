@@ -14,7 +14,7 @@
         {{ .Content }}
       </div>
 
-      {{ if .Pages }}
+      {{ if and .Pages (ne .Params.showDocList false) }}
         <section class="doc-list" aria-labelledby="more-docs-heading">
           <h2 id="more-docs-heading">Documentation</h2>
           <div class="doc-list__items">

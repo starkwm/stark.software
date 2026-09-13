@@ -1,0 +1,12 @@
+<div class="docs-sidebar__group">
+  <p class="docs-sidebar__label">{{ .section.Title }}</p>
+  {{ partial "docs-sidebar-link" (dict "page" .section "current" .current "label" "Overview") }}
+  {{ $current := .current }}
+  {{ range .section.RegularPages.ByWeight }}
+    {{ partial "docs-sidebar-link" (dict "page" . "current" $current) }}
+  {{ end }}
+</div>
+{{ $current := .current }}
+{{ range .section.Sections.ByWeight }}
+  {{ partial "docs-sidebar-section" (dict "section" . "current" $current) }}
+{{ end }}

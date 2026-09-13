@@ -1,0 +1,4 @@
+{{ $isCurrent := eq .page.RelPermalink .current.RelPermalink }}
+<a class="docs-sidebar__link{{ if $isCurrent }} is-active{{ end }}" href="{{ .page.RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>
+  {{ .label | default .page.Title }}
+</a>

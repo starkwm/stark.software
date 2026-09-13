@@ -8,6 +8,9 @@
         {{ with .Description }}
           <p>{{ . }}</p>
         {{ end }}
+        {{ with .Params.cadence }}
+          <p>Updates: {{ . }}.</p>
+        {{ end }}
       </header>
 
       <div class="prose">

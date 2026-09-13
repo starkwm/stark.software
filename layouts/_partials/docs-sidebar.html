@@ -1,33 +1,28 @@
-{{ $section := .CurrentSection }}
-{{ if .IsSection }}
-  {{ $section = . }}
-{{ end }}
+{{ $product := .FirstSection }}
 
 <aside class="docs-sidebar" aria-label="Documentation navigation">
   <div class="docs-sidebar__group">
     <p class="docs-sidebar__label">Products</p>
     {{ range site.Sections.ByWeight }}
-      {{ $isCurrent := eq .RelPermalink $section.RelPermalink }}
-      <a class="docs-sidebar__link{{ if $isCurrent }} is-active{{ end }}" href="{{ .RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>
+      {{ $isCurrent := eq .RelPermalink $product.RelPermalink }}
+      <a class="docs-sidebar__link{{ if $isCurrent }} is-active{{ end }}" href="{{ .RelPermalink }}"{{ if eq .RelPermalink $.RelPermalink }} aria-current="page"{{ end }}>
         {{ .Title }}
       </a>
     {{ end }}
   </div>
 
-  {{ with $section }}
+  {{ with $product }}
     {{ if .Pages }}
       <div class="docs-sidebar__group">
         <p class="docs-sidebar__label">{{ .Title }} docs</p>
-        <a class="docs-sidebar__link{{ if $.IsSection }} is-active{{ end }}" href="{{ .RelPermalink }}"{{ if $.IsSection }} aria-current="page"{{ end }}>
-          Overview
-        </a>
-        {{ range .Pages.ByWeight }}
-          {{ $isCurrent := eq .RelPermalink $.RelPermalink }}
-          <a class="docs-sidebar__link{{ if $isCurrent }} is-active{{ end }}" href="{{ .RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>
-            {{ .Title }}
-          </a>
+        {{ partial "docs-sidebar-link" (dict "page" . "current" $ "label" "Overview") }}
+        {{ range .RegularPages.ByWeight }}
+          {{ partial "docs-sidebar-link" (dict "page" . "current" $) }}
         {{ end }}
       </div>
+      {{ range .Sections.ByWeight }}
+        {{ partial "docs-sidebar-section" (dict "section" . "current" $) }}
+      {{ end }}
     {{ end }}
   {{ end }}
 </aside>
