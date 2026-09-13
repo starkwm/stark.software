@@ -24,7 +24,8 @@ Set these options inside `battery`. Use `showSymbol: false` for text-only output
 | `symbols.font` | - | Shared installed font name for glyph symbols; each glyph can override it. |
 | `symbols.size` | Resolved item/theme font size | Shared glyph size, 8 to 72 points; each glyph can override it. |
 | `symbols.levels` | Five system battery icons | Exactly five symbols for 0, 25, 50, 75, 100%; nearest 25% step. |
-| `symbols.charging` | `battery.100percent.bolt` | Charging icon. |
+| `symbols.chargingLevels` | Unset | Exactly five charging symbols for 0, 25, 50, 75, 100%; nearest 25% step. Takes precedence over `symbols.charging`. |
+| `symbols.charging` | `battery.100percent.bolt` | Charging icon when `symbols.chargingLevels` is omitted or `null`. |
 | `symbols.pluggedIn` | `powerplug` | AC power without charging icon. |
 | `tints.low` | Normal tint | At or below threshold while on battery. |
 | `tints.charging` | Normal tint | Charging colour. |
@@ -33,6 +34,8 @@ Set these options inside `battery`. Use `showSymbol: false` for text-only output
 An item-level `symbol` overrides the battery-level, charging, and plug icons. `showSymbol: false` hides that override too.
 
 Symbols accept SF Symbol names or [font glyph objects](/sbar/configuration/appearance/#font-glyph-symbols). Use [`symbolFontWeight`](/sbar/configuration/appearance/#sf-symbol-weight) to set SF Symbol weight independently of text.
+
+Set `symbols.chargingLevels` to show the charge level while charging. Its entries inherit `symbols.font` and `symbols.size`, with per-glyph overrides. Omit it or use `null` to keep the single charging icon.
 
 [Shared item options](/sbar/configuration/items/) cover styling, symbols, actions, priority, and enabled state.
 
@@ -66,12 +69,23 @@ The provider uses the first power source with readable capacity data. There is n
 
 ## Example
 
+Show the charge level while charging, with a green tint to indicate charging and a red tint for low battery:
+
 ```json
 {
   "id": "battery",
   "type": "battery",
   "battery": {
     "lowThreshold": 20,
+    "symbols": {
+      "chargingLevels": [
+        "battery.0percent",
+        "battery.25percent",
+        "battery.50percent",
+        "battery.75percent",
+        "battery.100percent"
+      ]
+    },
     "tints": {
       "low": "#FF6655",
       "charging": "#66CC88"

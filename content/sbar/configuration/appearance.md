@@ -217,7 +217,7 @@ An item-level glyph needs its own font:
 
 Within any provider's `symbols` block, glyphs can inherit `font` and `size` from that block. Each glyph can override either value. A glyph must set a font or inherit one. SF Symbol strings ignore these font settings. Glyphs returned by commands and plugins must include their own font; they do not inherit the configured symbol font.
 
-Battery `symbols.levels` accepts exactly five symbols, ordered 0%, 25%, 50%, 75%, 100%:
+Battery `symbols.levels` and optional `symbols.chargingLevels` each accept exactly five symbols, ordered 0%, 25%, 50%, 75%, 100%:
 
 ```json
 {
