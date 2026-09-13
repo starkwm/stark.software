@@ -1,5 +1,5 @@
 ---
-description: Open-source window managers and keyboard shortcuts for macOS.
+description: Open-source window managers, keyboard shortcuts, and status bars for macOS.
 ---
 
 Stark Software is a collection of [open-source][starkwm] macOS tools. I built them to manage my windows and run commands from the keyboard.

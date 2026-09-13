@@ -9,7 +9,7 @@ style = 'github'
 noClasses = false
 
 [params]
-description = 'Open-source window managers and keyboard shortcuts for macOS.'
+description = 'Open-source window managers, keyboard shortcuts, and status bars for macOS.'
 htmlLang = 'en-GB'
 
 [[menu.main]]
@@ -28,6 +28,11 @@ weight = 3
 name = 'skbd'
 url = '/skbd/'
 weight = 4
+
+[[menu.main]]
+name = 'sbar'
+url = '/sbar/'
+weight = 5
 
 [[menu.footer]]
 name = 'GitHub'
