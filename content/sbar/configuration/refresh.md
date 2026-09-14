@@ -30,6 +30,8 @@ A trigger normally captures the latest shared value without querying the hardwar
 
 [Mail](/sbar/providers/mail/#updates) queries Apple Mail when enabled, then waits the shortest `mail.pollInterval` among enabled Mail items after each completed read. Omitted intervals count as 30 seconds; the minimum is 5 seconds. Changing the shared interval on reload starts an immediate query. Item refresh settings control snapshots independently of this polling schedule.
 
+[Weather](/sbar/providers/weather/#updates) fetches each configured location immediately, then waits the shortest `weather.pollInterval` among enabled items at that location after each request finishes. The default is 15 minutes. Item refresh settings control snapshots independently of network polling.
+
 Commands run at startup even in manual mode. An interval reruns the command after the previous execution finishes and the interval elapses. The bar combines matching triggers received within 50 milliseconds. These replace any running command and restart its interval schedule.
 
 Plugins stream updates at their own rate, regardless of the item refresh policy. The bar queues up to 32 triggers per plugin. It drops new triggers when the queue is full, while waiting to restart, or after a one-shot process exits. Each new process receives a new queue with `start` first.
@@ -40,7 +42,7 @@ Providers and commands pause during sleep and restart after wake.
 
 Adding or removing an unrelated provider keeps existing native providers running. Their playback state, metric history, and sampling baselines remain available. For example, adding a clock does not reset an existing media item to `Waiting for playback`.
 
-Native refresh snapshots and interval timing survive a reload when the item's `id`, `type`, `refresh` settings, and disk path are unchanged. Styling edits, text-template edits, and changes to other items do not refresh a held reading. Templates render fields from that same snapshot. A new item or a change to its type, refresh policy, or disk path captures a new snapshot for that item. Removing its refresh policy returns it to live provider updates.
+Native refresh snapshots and interval timing survive a reload when the item's `id`, `type`, `refresh` settings, disk path, and weather coordinates are unchanged. Styling edits, text-template edits, weather unit changes, and changes to other items do not refresh a held reading. Templates render fields from that same snapshot. A new item or a change to its type, refresh policy, disk path, or weather coordinates captures a new snapshot for that item. Removing its refresh policy returns it to live provider updates.
 
 These rules apply to configuration reloads, not a process restart. Restarting the bar starts providers and captures initial values again.
 
@@ -48,12 +50,12 @@ These rules apply to configuration reloads, not a process restart. Restarting th
 
 ### Start the bar
 
-Run `sbar` or `sbar start` to start the bar with `~/.config/sbar/config.json`. Both accept `--config <path>` for another configuration file. The process keeps running until you stop it.
+Run `sbar` or `sbar start` to start the bar. By default, sbar uses `~/.config/sbar/config.jsonc` when it exists, then `~/.config/sbar/config.json`. Both commands accept `--config <path>` for another configuration file. The process keeps running until you stop it.
 
 Client commands connect to `~/.config/sbar/control.sock` by default. A bar started with `--config` creates `control.sock` beside that file. Pass `--socket <path>` after the client subcommand to target that bar:
 
 ```sh
-sbar start --config /path/to/config.json
+sbar start --config /path/to/config.jsonc
 ```
 
 In another terminal:
@@ -71,7 +73,7 @@ Run `sbar --help` or `sbar <command> --help` for help. Client commands and valid
 
 ```sh
 sbar validate
-sbar validate --config /path/to/config.json
+sbar validate --config /path/to/config.jsonc
 ```
 
 Validation works without a running bar. It reads the default file unless you pass `--config`, reports invalid or missing files, and never writes to the file. See [configuration](/sbar/configuration/) for the required fields.

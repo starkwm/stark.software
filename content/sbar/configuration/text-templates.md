@@ -142,6 +142,7 @@ Provider pages define their fields, accepted states, and examples:
 - [Audio devices](/sbar/providers/audiodevice/#text-templates)
 - [Mail](/sbar/providers/mail/#text-templates)
 - [Network](/sbar/providers/network/#text-templates)
+- [Weather](/sbar/providers/weather/#text-templates)
 - [VPN](/sbar/providers/vpn/#text-templates)
 - [Bluetooth](/sbar/providers/bluetooth/#text-templates)
 - [CPU](/sbar/providers/cpu/#text-templates)
@@ -157,7 +158,7 @@ Provider pages define their fields, accepted states, and examples:
 
 Static `text` and `popup` items have no additional fields.
 
-Fields follow the item's media source, audio endpoint, disk path, network interface, and CPU/throughput smoothing settings. They also use its [refresh snapshot](/sbar/configuration/refresh/). Editing the template changes how a held reading appears without refreshing it.
+Fields follow the item's media source, audio endpoint, disk path, network interface, weather units, and CPU/throughput smoothing settings. They also use its [refresh snapshot](/sbar/configuration/refresh/). Editing the template changes how a held reading appears without refreshing it.
 
 ## Symbols, visibility, and accessibility
 

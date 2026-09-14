@@ -27,7 +27,7 @@ Place items in `items.left`, `items.center`, or `items.right` in display order. 
 | `timeStyle` | `short` | Localised time style for `datetime`: `none`, `short`, `medium`, `long`, or `full`. |
 | `children` | Empty | Items for a group or popup. |
 | `frontApplication` | - | [Native application icon](/sbar/providers/frontapplication/) configuration. |
-| `aerospace`, `audioDevice`, `battery`, `bluetooth`, `cpu`, `disk`, `media`, `memory`, `network`, `spaces`, `throughput`, `volume`, `vpn`, `yabai` | - | Provider settings for data, appearance, and visibility. |
+| `aerospace`, `audioDevice`, `battery`, `bluetooth`, `cpu`, `disk`, `media`, `memory`, `network`, `spaces`, `throughput`, `volume`, `vpn`, `weather`, `yabai` | - | Provider settings for data, appearance, and visibility. |
 | `command`, `plugin` | - | Required process settings for the corresponding type. |
 
 The [Mail provider](/sbar/providers/mail/) uses shared item options only; it has no dedicated configuration block.
@@ -86,7 +86,7 @@ Set `symbolPosition` on each child that needs it. Children do not inherit their 
 
 ### Overflow
 
-Disabled items and items hidden by their provider take no layout space or inter-item spacing and do not appear in overflow. Hidden children are also excluded from groups and popovers. Items hidden by a provider keep updating while enabled, so they can reappear when their state changes.
+Disabled items and items hidden by their provider take no layout space or inter-item spacing and do not appear in overflow. Hidden children are also excluded from groups and popovers. A group with no visible children is hidden, including an empty group or one that contains only hidden nested groups. Items hidden by a provider keep updating while enabled, so they can reappear when their state changes.
 
 Each region measures its items, allows flexible text to compress, and moves low-priority items into an overflow popover when space runs out. Larger `priority` values remain visible longer; equal priorities hide from the end. On displays without a notch, the centre reserves one third of the bar when populated. Beside a notch, the centre and right sections share the usable right-hand area. Bar content stays clipped within its own region.
 

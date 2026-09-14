@@ -1,7 +1,7 @@
 ---
 title: "Media"
 description: "Apple Music and Spotify track details, with source selection and playback state icons."
-weight: 15
+weight: 16
 category: Desktop
 cadence: "Playback notifications"
 options: "`media` block"

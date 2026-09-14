@@ -52,6 +52,8 @@ Set these properties inside `theme`:
 | `verticalPadding` | `0` | Top and bottom content padding, from 0 to 48 points. |
 | `cornerRadius` | `0` | Bar corner radius, from 0 to 48 points. |
 | `itemSpacing` | `10` | Space between items in a bar region, from 0 to 96 points. |
+| `regionStyle` | Defaults below | Shared style for the left, centre, and right regions. |
+| `regions` | Inherit `regionStyle` | Per-region `left`, `center`, and `right` overrides. |
 | `itemStyle` | Defaults below | Default style for individual items. |
 
 Set these properties inside `theme.itemStyle` or an item's `style`:
@@ -73,6 +75,55 @@ Set these properties inside `theme.itemStyle` or an item's `style`:
 | `alignment` | `center` | Content alignment within the item width: `leading`, `center`, or `trailing`. |
 
 Bar padding sits inside `bar.height`. Styling does not increase the bar's height, and content that exceeds its bar region is clipped. Bar corners clip both the background and content. See [bar settings](/sbar/configuration/#bar-settings) for height and margins, and [shadows](/sbar/configuration/#shadows) for `bar.shadow`.
+
+## Region backgrounds
+
+Set `theme.regionStyle` to style all three bar regions. Use `theme.regions.left`, `theme.regions.center`, and `theme.regions.right` for individual overrides. Each property inherits separately when omitted or `null`. A zero value or transparent colour overrides the shared setting.
+
+```json
+{
+  "schemaVersion": 1,
+  "bar": { "shadow": false },
+  "theme": {
+    "background": "#00000000",
+    "verticalPadding": 4,
+    "regionStyle": {
+      "background": "#1A1B26",
+      "cornerRadius": 8,
+      "horizontalPadding": 10,
+      "verticalPadding": 2,
+      "borderColor": "#414868",
+      "borderWidth": 1
+    },
+    "regions": {
+      "center": { "background": "#24283B" },
+      "right": { "cornerRadius": 12 }
+    }
+  },
+  "items": {
+    "left": [{ "id": "app", "type": "frontApplication" }],
+    "right": [{ "id": "clock", "type": "datetime", "format": "HH:mm" }]
+  }
+}
+```
+
+Set these properties inside `theme.regionStyle` or a region override:
+
+| Property | Default | Description |
+| --- | --- | --- |
+| `background` | Transparent | Region background colour. |
+| `borderColor` | Transparent | Region border colour. |
+| `borderWidth` | `0` | Inset border width, from 0 to 48 points. |
+| `cornerRadius` | `0` | Region corner radius, from 0 to 48 points. |
+| `horizontalPadding` | `0` | Left and right padding, from 0 to 96 points. |
+| `verticalPadding` | `0` | Top and bottom padding, from 0 to 48 points. |
+| `itemSpacing` | Theme spacing, then `10` | Space between items, from 0 to 96 points. |
+
+Region backgrounds fit their visible items, padding, and overflow button. A flexible spacer can expand a region to its allocated width. Empty regions draw nothing, including regions whose items are all hidden. Alignment and notch placement do not change.
+
+Padding reduces the room available to items and may move them into overflow. sbar limits padding to half the allocated width or height. Regions stay within `bar.height`, and oversized content remains clipped. Borders draw inside the region bounds. Region decoration adds no click targets, so mouse pass-through still uses item bounds.
+
+The whole-bar background and corner radius still apply. Use a transparent `theme.background` and disable `bar.shadow` for separate floating regions. Region shadows and material backgrounds are not supported. See the complete [sections example](https://github.com/starkwm/bar/tree/main/examples/sections).
 
 ## Hover colours
 

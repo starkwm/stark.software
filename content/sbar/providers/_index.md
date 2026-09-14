@@ -18,6 +18,7 @@ Every provider uses the same item structure. Start with `id` and `type`, then ad
 | [Audio devices](/sbar/providers/audiodevice/) | Native events / 2-second retries when unavailable | `audioDevice` block |
 | [Mail](/sbar/providers/mail/) | Configurable polling; 30 seconds by default | `mail` |
 | [Network](/sbar/providers/network/) | Native events | `network` block |
+| [Weather](/sbar/providers/weather/) | Configurable polling; 15 minutes by default | `weather` block |
 | [VPN](/sbar/providers/vpn/) | Native events / 2-second retries when unavailable | `vpn` block |
 | [Bluetooth](/sbar/providers/bluetooth/) | Native events / 2-second retries when unavailable | `bluetooth` block |
 | [CPU](/sbar/providers/cpu/) | 2-second sampling | `cpu` block |

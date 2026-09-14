@@ -1,7 +1,7 @@
 ---
 title: "VPN"
 description: "Names and connection states of VPN services registered with macOS."
-weight: 9
+weight: 10
 category: Connectivity
 cadence: "Native events"
 options: "`vpn` block"

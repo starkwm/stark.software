@@ -5,19 +5,37 @@ showDocList: false
 weight: 1
 ---
 
-Edit `~/.config/sbar/config.json`. sbar reloads it when the file changes. If the file is missing, the bar shows the application owning the menu bar, a divider, and a clock. Removing the file restores that default bar. If an edit is invalid, sbar keeps the last valid configuration. If the file is invalid at startup, it uses the default bar.
+By default, sbar looks for `~/.config/sbar/config.jsonc`, then `~/.config/sbar/config.json`. Edit either file and sbar reloads it when the file changes. If neither file exists, the bar shows the application owning the menu bar, a divider, and a clock. Removing the active file restores that default bar. If an edit is invalid, sbar keeps the last valid configuration. If the file is invalid at startup, it uses the default bar.
 
 Inspect errors with `sbar query --diagnostics`. Valid reloads preserve unchanged native providers and [refresh snapshots](/sbar/configuration/refresh/#configuration-reloads).
 
-Run `sbar validate` to check the file without starting the bar. To check another file, use `sbar validate --config /path/to/config.json`. Invalid or missing files produce an error and a nonzero exit status. Validation never writes the file. Use `sbar start --config /path/to/config.json` to run with another configuration.
+Run `sbar validate` to check the file without starting the bar. To check another file, use `sbar validate --config /path/to/config.jsonc`. Invalid or missing files produce an error and a nonzero exit status. Validation never writes the file. Use `sbar start --config /path/to/config.jsonc` to run with another configuration.
+
+Configuration files accept `//` line comments, `/* ... */` block comments, and trailing commas in objects and arrays. sbar removes them in memory before decoding. It does not change the file, and comment markers inside strings remain literal text. Block comments cannot nest.
+
+Both `.jsonc` and `.json` files accept this syntax. `sbar start` and `sbar validate` prefer `config.jsonc` when both default files exist. If `config.jsonc` is invalid, sbar reports the error instead of falling back to `config.json`.
+
+```jsonc
+{
+  "schemaVersion": 1,
+  // Leave room for the menu bar.
+  "bar": { "margin": { "top": 40, }, },
+  "items": {
+    "right": [
+      /* Use a 24-hour clock. */
+      { "id": "clock", "type": "datetime", "format": "HH:mm", },
+    ],
+  },
+}
+```
 
 Save persistent changes in the configuration file. sbar never writes to the file or backs it up. For editor completion, copy [config.schema.json](/sbar/config.schema.json) beside your configuration and add `"$schema": "config.schema.json"` to the root object.
 
-The [Everyday bar](https://github.com/starkwm/bar/tree/main/examples/everyday) includes native application icons, media shown only during playback, CPU and memory percentages, unread Mail counts, and connection and audio-device popovers. It uses [text templates](/sbar/configuration/text-templates/) for labels, plus hover colours and minimum widths for its CPU and memory items. The [floating bar](https://github.com/starkwm/bar/tree/main/examples/floating) has fewer items, inset edges, and rounded corners.
+The [Everyday bar](https://github.com/starkwm/bar/tree/main/examples/everyday) includes native application icons, media shown only during playback, weather, system metrics, unread Mail counts, and connection and audio-device popovers. It uses [text templates](/sbar/configuration/text-templates/) for labels, plus hover colours and minimum widths for its CPU and memory items. The [floating bar](https://github.com/starkwm/bar/tree/main/examples/floating) has fewer items, inset edges, and rounded corners. The [sections example](https://github.com/starkwm/bar/tree/main/examples/sections) gives the left, centre, and right regions separate backgrounds and borders.
 
 ## Example
 
-Create `~/.config/sbar/config.json` with a configuration such as:
+Create `~/.config/sbar/config.jsonc` with a configuration such as:
 
 ```json
 {

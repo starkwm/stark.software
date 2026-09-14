@@ -46,7 +46,7 @@ Create the configuration directory:
 mkdir -p ~/.config/sbar
 ```
 
-Save this as `~/.config/sbar/config.json`, then run `sbar`:
+Save this as `~/.config/sbar/config.jsonc`, then run `sbar`:
 
 ```json
 {
@@ -110,4 +110,4 @@ The app's `symbol` is a fallback if its native icon is unavailable. Battery icon
 
 ## About this reference
 
-This reference was checked against the sbar source and documentation on 12 September 2026. Values and date formats depend on your Mac and system locale. [Download the configuration schema](/sbar/config.schema.json).
+This reference was checked against the sbar source and documentation on 14 September 2026. Values and date formats depend on your Mac and system locale. [Download the configuration schema](/sbar/config.schema.json).

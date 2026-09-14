@@ -1,7 +1,7 @@
 ---
 title: "Memory"
 description: "Used memory, for example RAM 8 GB, from active, wired, and compressed pages."
-weight: 12
+weight: 13
 category: System
 cadence: "2-second sampling"
 options: "`memory` block"

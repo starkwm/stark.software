@@ -1,7 +1,7 @@
 ---
 title: "Process plugin"
 description: "Text and dynamic appearance streamed by an external process over newline-delimited JSON."
-weight: 20
+weight: 21
 category: Extensions
 cadence: "Process stream"
 options: "`plugin` block"
