@@ -31,7 +31,9 @@ Both `.jsonc` and `.json` files accept this syntax. `sbar start` and `sbar valid
 
 Save persistent changes in the configuration file. sbar never writes to the file or backs it up. For editor completion, copy [config.schema.json](/sbar/config.schema.json) beside your configuration and add `"$schema": "config.schema.json"` to the root object.
 
-The [Everyday bar](https://github.com/starkwm/bar/tree/main/examples/everyday) includes native application icons, media shown only during playback, weather, system metrics, unread Mail counts, and connection and audio-device popovers. It uses [text templates](/sbar/configuration/text-templates/) for labels, plus hover colours and minimum widths for its CPU and memory items. The [floating bar](https://github.com/starkwm/bar/tree/main/examples/floating) has fewer items, inset edges, and rounded corners. The [sections example](https://github.com/starkwm/bar/tree/main/examples/sections) gives the left, centre, and right regions separate backgrounds and borders.
+The [Everyday bar](https://github.com/starkwm/sbar/tree/main/examples/everyday) includes native application icons, media shown only during playback, weather, system metrics, unread Mail counts, and connection and audio-device popovers. It uses [text templates](/sbar/configuration/text-templates/) for labels, plus hover colours and minimum widths for its CPU and memory items. The [floating bar](https://github.com/starkwm/sbar/tree/main/examples/floating) has fewer items, inset edges, and rounded corners. The [sections example](https://github.com/starkwm/sbar/tree/main/examples/sections) gives the left, centre, and right regions separate backgrounds and borders.
+
+The [groups example](https://github.com/starkwm/sbar/tree/main/examples/groups) demonstrates child spacing and style inheritance. For a side bar, see the [vertical example](https://github.com/starkwm/sbar/tree/main/examples/vertical).
 
 ## Example
 
@@ -63,8 +65,10 @@ Provider configuration blocks must match the item's `type`. For example, an `aud
 
 | Property | Default | Description |
 | --- | --- | --- |
-| `position` | `top` | `top` or `bottom`. |
-| `height` | `32` | 20 to 96 points, including content padding. |
+| `position` | `top` | `top`, `bottom`, `left`, or `right`. |
+| `height` | `32` | Horizontal bar height, 20 to 96 points including padding. |
+| `width` | `32` | Vertical bar width, 20 to 96 points including padding. |
+| `extendToTopEdge` | `false` | Extend side bars into the menu-bar area, respecting the Dock and margins. Ignored by horizontal bars. |
 | `margin` | All `0` | Object with `top`, `bottom`, `left`, `right` offsets, each from 0 to 4096 points. |
 | `displays` | `all` | `main`, `all`, or `selected`. |
 | `displayIDs` | None | Display IDs, required when `displays` is `selected`. |
@@ -76,7 +80,9 @@ Provider configuration blocks must match the item's `type`. For example, an `aud
 
 The default `floating` window level keeps the bar above ordinary windows and below system notifications and the revealed menu bar. Explicit `statusBar` and `screenSaver` levels can cover notifications, especially when the menu bar auto-hides and banners overlap the bar.
 
-A top bar sits at the physical screen edge and shares the system menu-bar area. A bottom bar stays within the Dock's visible work area. On notched displays, items avoid the cutout and the centre section sits immediately to its right.
+A top bar sits at the physical screen edge and shares the system menu-bar area. Bottom and side bars fit within the space left by the menu bar and Dock. Set `extendToTopEdge` to extend a side bar into the menu-bar area. When a top bar crosses a notch, its items avoid the cutout and the centre section sits immediately to its right.
+
+Bars hide on displays showing a full-screen app and return on desktop Spaces. Bars on other displays stay visible. This applies to every position and window level, even without a Spaces item.
 
 The bar does not hide the system menu bar or reserve space for application windows. Set a gap in your window manager and adjust the bar's margins to avoid overlap.
 
@@ -105,14 +111,48 @@ To create a floating bar, add margins and rounded corners:
 }
 ```
 
-Margins shrink the area available to the bar. Top bars sit at the top of that area, and bottom bars sit at the bottom. Left and right margins control width independently. sbar limits excessive margins to leave at least one point of available space and reduces the height to fit. The top margin starts at the physical screen edge. Leave enough room for your display's notch and menu bar. Notch avoidance stops once the panel is below the cutout. These settings reload automatically when the configuration file changes.
+Margins leave space between the bar and its placement area's edges. Left and right margins shorten horizontal bars; top and bottom margins shorten side bars. Excessive margins are clamped to leave at least one point of space, and the bar shrinks to fit.
 
-The theme's `verticalPadding` and `cornerRadius` accept 0 to 48 points and default to zero. Padding sits inside `bar.height`. The rounded corners clip the content and background, whether you use the system material or a custom colour.
+For top bars and side bars with `extendToTopEdge`, `margin.top` starts at the physical screen edge. Leave enough room for the menu bar or notch. Other positions use the usable display area. Changes reload automatically.
+
+The theme's `verticalPadding` and `cornerRadius` accept 0 to 48 points and default to zero. Padding sits inside the bar. The rounded corners clip the content and background, whether you use the system material or a custom colour.
+
+## Vertical bars
+
+Set `bar.position` to `left` or `right` and set the width with `bar.width`. Items stay upright and run from top to bottom on either edge.
+
+| Section | Position in a side bar |
+| --- | --- |
+| `items.left` | Top |
+| `items.center` | Middle |
+| `items.right` | Bottom |
+
+The matching `theme.regions` styles follow the same order.
+
+```json
+{
+  "schemaVersion": 1,
+  "bar": { "position": "left", "width": 64 },
+  "theme": { "horizontalPadding": 4, "verticalPadding": 8 },
+  "items": {
+    "left": [{ "id": "spaces", "type": "spaces", "spaces": { "showSymbol": false } }],
+    "right": [{ "id": "clock", "type": "datetime", "format": "HH:mm" }]
+  }
+}
+```
+
+`bar.width` controls side bars; `bar.height` controls top and bottom bars. Both default to 32 points and accept 20 to 96. Padding and item widths keep their usual directions. Use short labels or `"text": ""` for icons without labels. Long labels truncate to fit.
+
+Group children and provider entries, such as a list of Spaces, stack vertically. Dividers run across the bar and spacers expand along it. [Overflow](/sbar/configuration/items/#overflow) uses item heights and the same priority order as horizontal bars. Popups open towards the middle of the display. Items inside them keep their horizontal layout.
+
+Side bars do not reserve space for other windows. Set a left or right gap in your window manager if needed.
+
+See the [vertical example](https://github.com/starkwm/sbar/tree/main/examples/vertical) for app shortcuts, status icons and popups.
 
 ## Shadows
 
 Set `bar.shadow` to `true` to enable a shadow. Inset or rounded bars use the native macOS window shadow. macOS controls its colour, blur, and offset.
 
-Square bars spanning the display's full width use a soft 16-point fade below a top bar or above a bottom bar. The fade shortens at the screen edge. It uses extra transparent window space that passes clicks through, so the shadow does not change the configured bar height, content position, or mouse hit regions.
+Square bars spanning the display's full width use a soft 16-point fade below a top bar or above a bottom bar. Side bars spanning the full display height cast the fade towards the middle of the display. The fade shortens at the screen edge. It uses extra transparent window space that passes clicks through, so the shadow does not change the configured bar height, content position, or mouse hit regions.
 
 Shadow changes reload with the configuration, including changes to the margins, background, and corner radius.

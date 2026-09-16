@@ -10,6 +10,12 @@ skbd runs shell commands when you press configured keyboard shortcuts. It uses [
 
 [quartz]: https://developer.apple.com/documentation/coregraphics/quartz-event-services
 
+## Requirements
+
+- macOS 26 or later
+- Accessibility permission for `skbd`
+- Xcode 26 or later with Swift 6.2 when building from source
+
 ## Installation
 
 Install skbd with [Homebrew][brew].
@@ -25,22 +31,42 @@ To build skbd from the [latest source][gh-skbd], install the latest Xcode and ma
 
     git clone https://github.com/starkwm/skbd.git
     cd skbd
-    make
+    make build
 
 If you build from source, you will need to create a Launch Agent `.plist` file to run skbd in the background.
 
 [brew]: https://brew.sh
 [gh-skbd]: https://github.com/starkwm/skbd
 
+The configuration must exist before starting `skbd`. Enable Accessibility permission in System Settings > Privacy & Security > Accessibility, then restart the service:
+
+```sh
+brew services restart skbd@2
+```
+
+For a source build, run `.build/debug/skbd` in the foreground. If startup reports `failed to create event tap`, check Accessibility permission.
+
+## Command line
+
+Run `skbd` without options to start the daemon. Only one instance can run per user.
+
+```text
+-c, --config <path>     Use a configuration file or directory
+-v, --version          Show version information
+-h, --help             Show help information
+```
+
+The selected configuration path must exist and parse successfully at startup. Help and version options do not start the daemon.
+
 ## Configuration
 
-Configure `skbd` with a single file or a directory of files. It reads `~/.config/skbd/skbdrc` by default. If the configured path points to a directory, `skbd` loads all non-hidden regular files in that directory in lexicographical filename order. Use `-c/--config` to select another path.
+Configure `skbd` with a single file or a directory of files. It reads `~/.config/skbd/skbdrc` by default. If the configured path points to a directory, `skbd` loads all non-hidden regular files in that directory in lexicographical filename order. Use `-c/--config` to select another path. Subdirectories are not loaded, and files do not need a particular extension. Files are joined with newlines and parsed as one configuration. The first matching binding wins; the last `.blocklist` directive replaces earlier lists.
 
 `skbd` reloads the configuration when you edit it. You do not need to restart the daemon. If the configured path is a symlink, `skbd` watches both the symlink location and the resolved target, so editing the target or repointing the symlink reloads the configuration. For a directory configuration, `skbd` reloads when files in the directory are edited, added, removed, or renamed.
 
 If a changed configuration cannot be loaded or parsed, `skbd` prints an error and keeps using the last valid configuration.
 
-To bind a command, specify its modifier keys and key.
+Join modifiers with `+`, separate them from the key with `-`, and put the command after `:`. Modifiers are optional, so `f19: open -a Terminal` is also valid. Modifiers must match exactly; holding Shift prevents a `cmd - k` binding from matching.
 
 ```
 cmd + shift - k: open -a iTerm
@@ -52,10 +78,10 @@ By default, `skbd` consumes the key event after executing the command. To allow 
 cmd + shift - k -> open -a iTerm
 ```
 
-`skbd` runs commands with the shell in `$SHELL`, or `/bin/bash` if it is unset. End a line with `\` to continue a command on the next line.
+`skbd` runs commands with the shell in `$SHELL`, or `/bin/bash` if it is unset or empty. Commands run with `-c`; standard output and standard error are discarded unless redirected. End a line with `\` to continue a command on the next line.
 
 ```
-ctrl + shift - enter:
+ctrl + shift - return:
     osascript -e 'if application "Ghostty" is running then' \
               -e '  tell application "System Events"' \
               -e '    click menu item "New Window" of menu "File" of menu bar 1 of process "Ghostty"' \
@@ -81,7 +107,7 @@ Available modifiers:
 - `hyper`
 - `fn`
 
-Prefix `shift`, `ctrl`, `alt`, or `cmd` with `l` or `r` to select the left or right modifier key.
+Prefix `shift`, `ctrl`, `opt`, `alt`, or `cmd` with `l` or `r` to select the left or right modifier key.
 
 `meh` combines `shift`, `ctrl`, and `alt`.
 
@@ -91,28 +117,44 @@ Prefix `shift`, `ctrl`, `alt`, or `cmd` with `l` or `r` to select the left or ri
 
 ### Keys
 
-The available key values are:
+#### Letters, digits, and punctuation
 
-- `return`
-- `tab`
-- `space`
-- `backspace`
-- `escape`
-- `backtick`
-- `delete`
-- `home`
-- `end`
-- `pageup`
-- `pagedown`
-- `insert`
-- `left`
-- `right`
-- `up`
-- `down`
-- `f1` to `f20`
-- `a` to `z`
-- `0` to `9`
-- `` ` ``, `-`, `=`, `[`, `]`, `'`, `;`, `\\`, `,`, `.`, `/`
+Use lowercase letters `a` through `z`, digits `0` through `9`, or these punctuation characters:
+
+```text
+` - = [ ] ' ; \ , . /
+```
+
+Character keys use the current ASCII-capable keyboard layout when the key map is first loaded. A punctuation key is written directly after the modifier separator:
+
+```text
+cmd - -: open -a Terminal
+cmd - [: open -a Finder
+cmd - ]: open -a Safari
+```
+
+#### Named keys
+
+| Group | Names |
+| --- | --- |
+| Typing | `return`, `tab`, `space`, `backspace`, `escape`, `backtick` |
+| Navigation | `delete`, `home`, `end`, `pageup`, `pagedown`, `insert` |
+| Arrows | `left`, `right`, `up`, `down` |
+| Function keys | `f1` through `f20` |
+
+Use `return` for the Return key. `backspace` is backward delete, and `delete` is forward delete.
+
+Navigation, arrow, and function key names automatically include the `fn` event flag when matching a shortcut.
+
+#### Hexadecimal key codes
+
+Use a hexadecimal macOS virtual key code prefixed with `0x` to bind by code:
+
+```text
+ctrl - 0x31: open -a Terminal
+```
+
+`0x31` is the Space key. Hexadecimal codes do not add the implicit `fn` flag used by named navigation, arrow, and function keys. Include `fn` in the modifiers when needed.
 
 ### Block list
 
@@ -126,3 +168,5 @@ Add process names to `.blocklist` to disable shortcuts while one of those proces
 ```
 
 In this example, skbd does not run shortcuts while Ghostty or Finder is frontmost.
+
+Block-list entries match the frontmost application's localised name exactly. Matching applications receive key events normally.

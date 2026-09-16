@@ -4,7 +4,7 @@ description: "Theme defaults, per-item overrides, and custom symbols."
 weight: 3
 ---
 
-The optional top-level `theme` sets bar appearance and default item styling. Each item's `style` overrides individual theme fields. Omitted or `null` fields inherit from the theme. Zero padding and transparent colours override inherited values.
+The optional top-level `theme` sets bar appearance and default item styling. Each item's `style` overrides individual theme fields. Groups can supply intermediate defaults through [`childStyle`](/sbar/configuration/items/#group-spacing). Omitted or `null` fields inherit from the theme. Zero padding and transparent colours override inherited values.
 
 ## Example
 
@@ -75,7 +75,7 @@ Set these properties inside `theme.itemStyle` or an item's `style`:
 | `width` | - | Fixed item width, from 0 to 4096 points; takes precedence over `minWidth`. |
 | `alignment` | `center` | Content alignment within the item width: `leading`, `center`, or `trailing`. |
 
-Bar padding sits inside `bar.height`. Styling does not increase the bar's height, and content that exceeds its bar region is clipped. Bar corners clip both the background and content. See [bar settings](/sbar/configuration/#bar-settings) for height and margins, and [shadows](/sbar/configuration/#shadows) for `bar.shadow`.
+Bar padding sits inside its configured height or width. Styling does not increase the bar's thickness, and content that exceeds its bar region is clipped. Bar corners clip both the background and content. See [bar settings](/sbar/configuration/#bar-settings) for height and margins, and [shadows](/sbar/configuration/#shadows) for `bar.shadow`.
 
 ## Text fonts
 
@@ -156,9 +156,9 @@ Set these properties inside `theme.regionStyle` or a region override:
 
 Region backgrounds fit their visible items, padding, and overflow button. A flexible spacer can expand a region to its allocated width. Empty regions draw nothing, including regions whose items are all hidden. Alignment and notch placement do not change.
 
-Padding reduces the room available to items and may move them into overflow. sbar limits padding to half the allocated width or height. Regions stay within `bar.height`, and oversized content remains clipped. Borders draw inside the region bounds. Region decoration adds no click targets, so mouse pass-through still uses item bounds.
+Padding reduces the room available to items and may move them into overflow. sbar limits padding to half the allocated width or height. Regions stay within the bar bounds, and oversized content remains clipped. Borders draw inside the region bounds. Region decoration adds no click targets, so mouse pass-through still uses item bounds.
 
-The whole-bar background and corner radius still apply. Use a transparent `theme.background` and disable `bar.shadow` for separate floating regions. Region shadows and material backgrounds are not supported. See the complete [sections example](https://github.com/starkwm/bar/tree/main/examples/sections).
+The whole-bar background and corner radius still apply. Use a transparent `theme.background` and disable `bar.shadow` for separate floating regions. Region shadows and material backgrounds are not supported. See the complete [sections example](https://github.com/starkwm/sbar/tree/main/examples/sections).
 
 ## Hover colours
 
@@ -406,3 +406,11 @@ Shell commands can return a JSON symbol, tint, and hidden state alongside text. 
 ### Process plugin appearance
 
 Process plugins can stream JSON symbols, tints, and visibility alongside text. Configure `plugin.symbols` and `plugin.tints` for running, success, and failure states. Item symbols override state symbols, then result symbols; each output message replaces the previous result. See [process plugin appearance](/sbar/providers/plugin/#state-appearance-and-errors) for precedence and error policies.
+
+## Vertical bar styling
+
+In side bars, `theme.regions.left`, `center` and `right` style the top, middle and bottom sections. Each section fills the inner bar width and grows vertically to fit its visible items. Empty sections draw nothing.
+
+Vertical padding leaves less height for items before they move into overflow. Horizontal padding leaves less width for each label.
+
+Item `width`, `minWidth` and `alignment` still control horizontal sizing. Allow for bar and section padding when setting an item width. Content wider than its section is clipped. See the [vertical example](https://github.com/starkwm/sbar/tree/main/examples/vertical).

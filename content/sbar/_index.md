@@ -21,8 +21,8 @@ Configure your macOS status bar with native providers, shell commands, and strea
 sbar requires macOS 26 or later. Building from source requires Xcode 26 or later with Swift 6.2.
 
 ```sh
-git clone https://github.com/starkwm/bar.git
-cd bar
+git clone https://github.com/starkwm/sbar.git
+cd sbar
 make build
 ```
 
@@ -108,6 +108,8 @@ This configuration shows the menu-bar owner's native icon, battery state colours
 
 The app's `symbol` is a fallback if its native icon is unavailable. Battery icons appear by default; this battery block adds state colours and sets the plugged-in symbol. On battery power, the low-battery colour applies at 20% or below by default. Date and time styles follow the system locale. See [application icons](/sbar/providers/frontapplication/), [battery appearance](/sbar/providers/battery/), and [date and time](/sbar/providers/datetime/) for more options.
 
+Use `sbar --version` to print the embedded version without starting the bar.
+
 ## About this reference
 
-This reference was checked against the sbar source and documentation on 14 September 2026. Values and date formats depend on your Mac and system locale. [Download the configuration schema](/sbar/config.schema.json).
+This reference was checked against the sbar source and documentation on 16 September 2026. Values and date formats depend on your Mac and system locale. [Download the configuration schema](/sbar/config.schema.json).
