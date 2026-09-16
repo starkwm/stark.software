@@ -17,10 +17,6 @@ name = 'Home'
 url = '/'
 weight = 1
 [[menu.main]]
-name = 'Stark'
-url = '/stark/'
-weight = 2
-[[menu.main]]
 name = 'swm'
 url = '/swm/'
 weight = 3
