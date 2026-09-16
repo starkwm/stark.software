@@ -64,6 +64,7 @@ Set these properties inside `theme.itemStyle` or an item's `style`:
 | `background` | Transparent | Item background colour. |
 | `hoverTint` | Normal tint | Text and symbol colour while the pointer is over an interactive item. |
 | `hoverBackground` | Subtle highlight | Background while the pointer is over an interactive item. |
+| `fontFamily` | System font | Installed font family or font name for item text. |
 | `fontSize` | `13` | Font size, from 8 to 72 points. |
 | `fontWeight` | `regular` | `regular`, `medium`, `semibold`, or `bold`. |
 | `symbolFontWeight` | Text weight | The same weights, applied to SF Symbols. |
@@ -75,6 +76,40 @@ Set these properties inside `theme.itemStyle` or an item's `style`:
 | `alignment` | `center` | Content alignment within the item width: `leading`, `center`, or `trailing`. |
 
 Bar padding sits inside `bar.height`. Styling does not increase the bar's height, and content that exceeds its bar region is clipped. Bar corners clip both the background and content. See [bar settings](/sbar/configuration/#bar-settings) for height and margins, and [shadows](/sbar/configuration/#shadows) for `bar.shadow`.
+
+## Text fonts
+
+Set `fontFamily` in `theme.itemStyle` to choose the default text font. Set it in an item's `style` to override that default:
+
+```json
+{
+  "schemaVersion": 1,
+  "bar": {},
+  "theme": {
+    "itemStyle": {
+      "fontFamily": "Menlo",
+      "fontSize": 13,
+      "fontWeight": "medium"
+    }
+  },
+  "items": {
+    "left": [
+      {
+        "id": "app",
+        "type": "frontApplication",
+        "style": { "fontFamily": "Helvetica Neue" }
+      }
+    ],
+    "right": [
+      { "id": "clock", "type": "datetime", "format": "HH:mm" }
+    ]
+  }
+}
+```
+
+The clock uses Menlo; the application name uses Helvetica Neue. Both inherit the theme's font size and weight. Use a font family or font name installed on your Mac.
+
+Omitted or `null` values inherit the theme font. Without a theme font, text uses the system font. `fontSize` and `fontWeight` still apply independently. Custom [font glyph symbols](#font-glyph-symbols) keep their own `font`; they do not use `fontFamily`.
 
 ## Region backgrounds
 
@@ -253,7 +288,7 @@ Every `symbol` accepts either an SF Symbol name or a glyph object. Install the f
 }
 ```
 
-Set `glyph` to literal text or a JSON Unicode escape. Set `font` to the installed font name. The optional `size` accepts 8 to 72 points. Without `size`, glyphs use the item or theme font size. Only the symbol uses the custom font; item text retains its normal font. Missing fonts or glyphs use macOS font fallback, which may display a missing-character box. You can mix SF Symbol strings with glyph objects.
+Set `glyph` to literal text or a JSON Unicode escape. Set `font` to the installed font name. The optional `size` accepts 8 to 72 points. Without `size`, glyphs use the item or theme font size. Only the symbol uses this font; item text uses the resolved `fontFamily` or the system font. Missing fonts or glyphs use macOS font fallback, which may display a missing-character box. You can mix SF Symbol strings with glyph objects.
 
 An item-level glyph needs its own font:
 
