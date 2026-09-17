@@ -485,11 +485,25 @@ button:focus-visible {
 }
 
 .home-hero {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: 0.93fr 1.07fr;
   align-items: center;
   gap: 48px;
   padding: 32px 20px 36px;
+}
+
+.home-hero::before,
+.home-story::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent) 1px, transparent 1px);
+  background-size: 20px 20px;
+  mask-image: radial-gradient(ellipse at center, #000 25%, transparent 75%);
 }
 
 .home-hero__content {
@@ -786,6 +800,8 @@ button:focus-visible {
 .legacy-project > .project__link { flex-shrink: 0; }
 
 .home-story {
+  position: relative;
+  isolation: isolate;
   padding: 26px 24px 24px;
 }
 
